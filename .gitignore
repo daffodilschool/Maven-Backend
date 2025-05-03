@@ -1,0 +1,56 @@
+HELP.md
+<<<<<<< HEAD
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+=======
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+>>>>>>> b605386 (first commit by kumar-student api's and staff api's done)
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+<<<<<<< HEAD
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+=======
+>>>>>>> b605386 (first commit by kumar-student api's and staff api's done)
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+<<<<<<< HEAD
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+=======
+>>>>>>> b605386 (first commit by kumar-student api's and staff api's done)
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+<<<<<<< HEAD
+=======
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+>>>>>>> b605386 (first commit by kumar-student api's and staff api's done)
+
+### VS Code ###
+.vscode/
