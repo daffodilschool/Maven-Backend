@@ -12,4 +12,5 @@ public interface StudentEntryService {
     Optional<StudentEntry> getStudentById(Long id);
     ResponseEntity<?> createStudent(StudentEntryDTO dto);
     List<StudentEntry> searchByAnyName(String name);
+    List<StudentEntry> getStudentsByAdmissionClass(String admissionclass);
 }

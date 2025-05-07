@@ -1,14 +1,20 @@
 package com.daffodilschool.schoolmanagement.service.impl;
 
+import com.daffodilschool.schoolmanagement.dto.FeeSummaryDTO;
+import com.daffodilschool.schoolmanagement.dto.FeeTypeRequestDTO;
 import com.daffodilschool.schoolmanagement.dto.StudentFeeSummaryDTO;
 import com.daffodilschool.schoolmanagement.dto.StudentFeesDTO;
+import com.daffodilschool.schoolmanagement.entity.FeeType;
 import com.daffodilschool.schoolmanagement.entity.StudentEntry;
 import com.daffodilschool.schoolmanagement.entity.StudentFees;
 import com.daffodilschool.schoolmanagement.repository.FeeTypeRepository;
 import com.daffodilschool.schoolmanagement.repository.StudentEntryRepository;
 import com.daffodilschool.schoolmanagement.repository.StudentFeesRepository;
 import com.daffodilschool.schoolmanagement.service.StudentFeesService;
+import com.daffodilschool.schoolmanagement.utils.CustomResponsePojo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +36,9 @@ public class StudentFeesServiceImpl implements StudentFeesService {
     public StudentFeesDTO saveStudentFees(StudentFeesDTO dto) {
         StudentFees fees = new StudentFees();
         fees.setStudent(studentRepository.findById(dto.getStudentId()).orElse(null));
-        fees.setFeeType(feeTypeRepository.findById(dto.getFeeTypeId()).orElse(null));
+        //fees.setFeeType(feeTypeRepository.findById(dto.getFeeTypeId()).orElse(null));
         //fees.setTotalfees(dto.getTotalfees());
-        fees.setAmountpaid(dto.getAmountpaid());
+        //fees.setAmountpaid(dto.getAmountpaid());
         fees.setFeespaiddate(dto.getFeespaiddate());
         fees.setModeoftransaction(dto.getModeoftransaction());
         fees.setRegisterrecieptid(dto.getRegisterrecieptid());
@@ -53,9 +59,9 @@ public class StudentFeesServiceImpl implements StudentFeesService {
                 StudentFeesDTO dto = new StudentFeesDTO();
                 dto.setId(f.getId());
                 dto.setStudentId(f.getStudent().getId());
-                dto.setFeeTypeId(f.getFeeType().getFeeid());
+                //dto.setFeeTypeId(f.getFeeType().getFeeid());
                 //dto.setTotalfees(f.getTotalfees());
-                dto.setAmountpaid(f.getAmountpaid());
+                //dto.setAmountpaid(f.getAmountpaid());
                 dto.setFeespaiddate(f.getFeespaiddate());
                 dto.setModeoftransaction(f.getModeoftransaction());
                 dto.setRegisterrecieptid(f.getRegisterrecieptid());
@@ -73,9 +79,9 @@ public class StudentFeesServiceImpl implements StudentFeesService {
             StudentFeesDTO dto = new StudentFeesDTO();
             dto.setId(f.getId());
             dto.setStudentId(f.getStudent().getId());
-            dto.setFeeTypeId(f.getFeeType().getFeeid());
+            //dto.setFeeTypeId(f.getFeeType().getFeeid());
             //dto.setTotalfees(f.getTotalfees());
-            dto.setAmountpaid(f.getAmountpaid());
+            //dto.setAmountpaid(f.getAmountpaid());
             dto.setFeespaiddate(f.getFeespaiddate());
             dto.setModeoftransaction(f.getModeoftransaction());
             dto.setRegisterrecieptid(f.getRegisterrecieptid());
@@ -103,5 +109,39 @@ public class StudentFeesServiceImpl implements StudentFeesService {
                 student.getTotalfesspaid(),
                 totalPaid
         );
+    }
+    @Override
+    public ResponseEntity<?> newsaveStudentFees(StudentFeesDTO dto) {
+        ResponseEntity<?> success = null;
+        StudentEntry student = studentRepository.findById(dto.getStudentId())
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        for (FeeTypeRequestDTO feeTypeRequest : dto.getFeeType()) {
+            FeeType feeType = feeTypeRepository.findById(feeTypeRequest.getFeeTypeId())
+                    .orElseThrow(() -> new RuntimeException("FeeType not found"));
+
+
+            StudentFees fees = new StudentFees();
+            fees.setStudent(student);
+            fees.setFeeType(feeType);
+            //fees.setTotalfees(dto.getTotalfees());
+            fees.setAmountpaid(feeTypeRequest.getAmountpaid());
+            fees.setFeespaiddate(dto.getFeespaiddate());
+            fees.setModeoftransaction(dto.getModeoftransaction());
+            fees.setRegisterrecieptid(dto.getRegisterrecieptid());
+            fees.setCreateddate(dto.getCreateddate());
+            fees.setCreatedby(dto.getCreatedby());
+            fees.setUpdateddate(dto.getUpdateddate());
+            fees.setUpdatedby(dto.getUpdatedby());
+
+
+            studentFeesRepository.save(fees);
+        }
+            success=  new ResponseEntity<>(new CustomResponsePojo("200", "Student fees saved successfully"), HttpStatus.OK);
+            return success;
+        }
+    @Override
+    public List<FeeSummaryDTO> getRemainingFeesForStudent(Long studentId) {
+        return studentFeesRepository.getFeeSummaryByStudent(studentId);
     }
 }

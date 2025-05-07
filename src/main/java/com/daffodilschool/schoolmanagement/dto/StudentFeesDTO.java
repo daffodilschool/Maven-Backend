@@ -4,14 +4,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Data
 public class StudentFeesDTO {
 
     private Long id;
     private Long studentId;
-    private Long feeTypeId;
+
+    private List<FeeTypeRequestDTO> feeType;
+
+    //private Long feeTypeId;
     //private Double totalfees;
-    private Double amountpaid;
+    //private Double amountpaid;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate feespaiddate;
     private String modeoftransaction;
@@ -41,7 +46,14 @@ public class StudentFeesDTO {
         this.studentId = studentId;
     }
 
-    public Long getFeeTypeId() {
+    public List<FeeTypeRequestDTO> getFeeType() {
+        return feeType;
+    }
+
+    public void setFeeType(List<FeeTypeRequestDTO> feeType) {
+        this.feeType = feeType;
+    }
+/*    public Long getFeeTypeId() {
         return feeTypeId;
     }
 
@@ -58,7 +70,7 @@ public class StudentFeesDTO {
 
     public void setAmountpaid(Double amountpaid) {
         this.amountpaid = amountpaid;
-    }
+    }*/
 
     public LocalDate getFeespaiddate() {
         return feespaiddate;

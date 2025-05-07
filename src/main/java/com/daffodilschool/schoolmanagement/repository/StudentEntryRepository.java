@@ -21,4 +21,6 @@ public interface StudentEntryRepository extends JpaRepository<StudentEntry, Long
             "OR LOWER(s.lastname) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<StudentEntry> searchByNamePart(@Param("name") String name);
 
+    List<StudentEntry> findByAdmissionclass(String admissionclass);
+
 }

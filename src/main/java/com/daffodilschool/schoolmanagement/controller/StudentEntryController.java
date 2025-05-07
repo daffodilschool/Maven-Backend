@@ -51,4 +51,10 @@ public class StudentEntryController {
         return ResponseEntity.ok(students);
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<List<StudentEntry>> getStudentsByAdmissionClass(
+            @RequestParam("admissionclass") String admissionclass) {
+        List<StudentEntry> students = studentEntryService.getStudentsByAdmissionClass(admissionclass);
+        return ResponseEntity.ok(students);
+    }
 }

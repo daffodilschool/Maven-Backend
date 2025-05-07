@@ -61,5 +61,9 @@ public class StudentEntryServiceImpl implements StudentEntryService {
     public List<StudentEntry> searchByAnyName(String name) {
         return repository.searchByNamePart(name);
     }
+    @Override
+    public List<StudentEntry> getStudentsByAdmissionClass(String admissionclass) {
+        return repository.findByAdmissionclass(admissionclass);
+    }
 
 }
