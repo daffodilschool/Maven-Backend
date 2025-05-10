@@ -32,6 +32,7 @@ public class StudentFees {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate feespaiddate;
     private String modeoftransaction;
+    private Long transactionId;
     private String registerrecieptid;
     @CreationTimestamp
     private LocalDate createddate;
@@ -134,5 +135,13 @@ public class StudentFees {
 
     public void setUpdatedby(String updatedby) {
         this.updatedby = updatedby;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
 }

@@ -32,6 +32,9 @@ public class DonationDTO {
     private LocalDate updateddate;
     private String updatedby;
 
+    private String modeoftransaction;
+    private Long transactionId;
+
     public Long getId() {
         return id;
     }
@@ -142,5 +145,21 @@ public class DonationDTO {
 
     public void setDonationDescription(String donationDescription) {
         this.donationDescription = donationDescription;
+    }
+
+    public String getModeoftransaction() {
+        return modeoftransaction;
+    }
+
+    public void setModeoftransaction(String modeoftransaction) {
+        this.modeoftransaction = modeoftransaction;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
 }

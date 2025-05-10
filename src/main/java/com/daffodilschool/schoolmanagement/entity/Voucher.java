@@ -174,4 +174,5 @@ public class Voucher {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
 }

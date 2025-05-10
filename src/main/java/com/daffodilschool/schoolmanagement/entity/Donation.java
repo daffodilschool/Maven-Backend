@@ -33,6 +33,8 @@ public class Donation {
 
     private String donationType;
     private String donationDescription;
+    private String modeoftransaction;
+    private Long transactionId;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate donationdate;
@@ -154,5 +156,21 @@ public class Donation {
 
     public void setDonationDescription(String donationDescription) {
         this.donationDescription = donationDescription;
+    }
+
+    public String getModeoftransaction() {
+        return modeoftransaction;
+    }
+
+    public void setModeoftransaction(String modeoftransaction) {
+        this.modeoftransaction = modeoftransaction;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
 }
